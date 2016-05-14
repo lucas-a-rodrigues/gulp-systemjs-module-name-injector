@@ -8,7 +8,7 @@ var windowsBackwardSlashRegex = /\\/g;
 
 module.exports = function (options) {
 	
-	if (options === null || option === undefined) {
+	if (options === null || options === undefined) {
 		options = {
 			rootDir: null, // Set a root directory to remove
 			prefix: null // Concat a prefix 
