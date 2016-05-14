@@ -15,7 +15,7 @@ The output is totally unusable, since the module doesn't have a name. This plugi
       // ... module
     });
 
-## Usage
+## Basic Usage
 
 Install the plugin:
 
@@ -29,5 +29,36 @@ In your gulpfile:
         return gulp.src(/* ... */)
             .pipe(typescript(tsProject))
             .pipe(systemjsModuleName())
+            .pipe(/* ... */);
+    }
+
+### Options
+
+    This fork brings a feature to modify the generated name.
+
+rootDir: The root path is removed
+    
+    rootDir: 'src/app'
+    // replace 'src/app/file' to '/file'
+    // this option accept regular expressions.
+    // Ex: rootDir: new RegExp('src\/app'), provide the same result '/file'
+
+prefix: Concatenate a new prefix
+    
+    prefix: './'
+    // replace 'src/app/file' to './src/app/file'
+
+### Usage
+
+    function buildTypescript() {
+        
+        var options = {
+            rootDir: 'src/app',
+            prefix: './' 
+        }
+    
+        return gulp.src(/* ... */)
+            .pipe(typescript(tsProject))
+            .pipe(systemjsModuleName(options))
             .pipe(/* ... */);
     }

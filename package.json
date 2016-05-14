@@ -1,6 +1,6 @@
 {
   "name": "gulp-systemjs-module-name-injector",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Injects file path as a module name in files starting with System.register([].",
   "main": "index.js",
   "scripts": {
@@ -14,12 +14,12 @@
     "systemjs",
     "gulp"
   ],
-  "author": "Milos Colakovic",
+  "author": "Milos Colakovic, Lucas Rodrigues",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Briareos/gulp-systemjs-module-name-injector/issues"
+    "url": "https://github.com/lucas-a-rodrigues/gulp-systemjs-module-name-injector/issues"
   },
-  "homepage": "https://github.com/Briareos/gulp-systemjs-module-name-injector#readme",
+  "homepage": "https://github.com/lucas-a-rodrigues/gulp-systemjs-module-name-injector#readme",
   "dependencies": {
     "readable-stream": "^2.0.2",
     "replacestream": "^4.0.0"
