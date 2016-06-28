@@ -52,7 +52,7 @@ module.exports = function (options) {
                 file.contents = file.contents.pipe(rs(search, replace));
             } else {      
                 var replacer = new Replacer(search, replace);
-                var result = someReplacer.replace(file.contents.toString('utf8'), file.relative);
+                var result = replacer.replace(file.contents.toString('utf8'), file.relative);
                 file.contents = new Buffer(result.code);
                 
                 if (file.sourceMap) {
