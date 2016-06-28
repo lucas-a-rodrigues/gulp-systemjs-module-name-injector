@@ -2,6 +2,8 @@
 
 var Transform = require('readable-stream/transform');
 var rs = require('replacestream');
+var applySourceMap = require('vinyl-sourcemaps-apply');
+var Replacer = require('regexp-sourcemaps');
 
 var jsExtensionRegex = /\.js/;
 var windowsBackwardSlashRegex = /\\/g;
@@ -14,6 +16,11 @@ module.exports = function (options) {
 			prefix: null // Concat a prefix 
 		};
 	}
+	
+	//It doesn't support sourcemaps with stream
+    if (file.sourceMap && !file.isStream()) {
+        options.sourcemap = true;
+    }
 	
     return new Transform({
         objectMode: true,
@@ -43,9 +50,16 @@ module.exports = function (options) {
 
             if (file.isStream()) {
                 file.contents = file.contents.pipe(rs(search, replace));
-            } else {
-                file.contents = new Buffer(String(file.contents).replace(search, replace));
+            } else {      
+                var replacer = new Replacer(search, replace);
+                var result = someReplacer.replace(file.contents.toString('utf8'), file.relative);
+                file.contents = new Buffer(result.code);
+                
+                if (file.sourceMap) {
+                	applySourceMap(file, result.map);
+                }
             }
+            
             return callback(null, file);
         }
     })

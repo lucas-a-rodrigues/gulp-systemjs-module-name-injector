@@ -13,7 +13,7 @@ The output is totally unusable, since the module doesn't have a name. This plugi
 
     System.register("module/path", ["./other/module/dependency"], function($_export) {
       // ... module
-    });
+    });  
 
 ## Basic Usage
 
@@ -62,3 +62,7 @@ prefix: Concatenate a new prefix
             .pipe(systemjsModuleName(options))
             .pipe(/* ... */);
     }
+
+## Obs: If file isn't stream (only buffer), now we could to use it with gulp-sourcemaps
+
+Thanks to "floridoo/vinyl-sourcemaps-apply" and "regexp-sourcemaps"
