@@ -17,11 +17,6 @@ module.exports = function (options) {
 		};
 	}
 	
-	//It doesn't support sourcemaps with stream
-    if (file.sourceMap && !file.isStream()) {
-        options.sourcemap = true;
-    }
-	
     return new Transform({
         objectMode: true,
         transform: function (file, encoding, callback) {
@@ -48,9 +43,10 @@ module.exports = function (options) {
             var search = /^System\.register\(\[/;
             var replace = "System.register('" + name + "', [";
 
+            //It doesn't support sourcemaps with stream
             if (file.isStream()) {
                 file.contents = file.contents.pipe(rs(search, replace));
-            } else {      
+            } else {
                 var replacer = new Replacer(search, replace);
                 var result = replacer.replace(file.contents.toString('utf8'), file.relative);
                 file.contents = new Buffer(result.code);
